@@ -1,3 +1,5 @@
+package ds.queue;
+
 public class Queue {
     int front, rear, size;
     int capacity;
