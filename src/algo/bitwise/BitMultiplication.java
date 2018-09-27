@@ -1,4 +1,4 @@
-package algo;
+package algo.bitwise;
 
 class BitMultiplication {
     int mul(int a, int b) {

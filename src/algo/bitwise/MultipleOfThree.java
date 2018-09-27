@@ -1,4 +1,4 @@
-package algo;
+package algo.bitwise;
 
 class MultipleOfThree {
     static int mulOf3(int n) {
