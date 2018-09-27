@@ -36,13 +36,25 @@ class Reverse {
     }
 
     /**
-     * find middle element of a linked list by 2 pointers,
-     * one that iterates 2 nodes
-     * second that iterates one node
+     * reverse the linked list 3 iterators,
+     * Initialize three pointers prev as NULL, curr as head and next as NULL
+     * Iterate trough the linked list. In loop, do following.
+     * *** Before changing next of current,
+     * *** store next node
+     * *** next = curr->next
      *
-     * @return
+     * *** Now change next of current
+     * *** This is where actual reversing happens
+     * *** curr->next = prev
+     *
+     * *** Move prev and curr one step forward
+     * *** prev = curr
+     * *** curr = next
+     *
+     * *** finally point the head to prev
+     * @return null
      */
-    void reverseList() {
+    void reverseListIteratively() {
         if (head == null) {
             System.out.println("No nodes present");
             return;
@@ -58,6 +70,29 @@ class Reverse {
         head = prev;
     }
 
+    void reverseListRecursively(Node curr, Node prev){
+        if(curr.next == null){
+            head = curr;
+            curr.next = prev;
+            return;
+        }
+
+        Node next = curr.next;
+        curr.next = prev;
+
+        reverseListRecursively(next, curr);
+    }
+
+    void reverseListCaller(){
+        if (head == null) {
+            System.out.println("No nodes present");
+            return;
+        }
+        Node prev = null;
+        Node curr = head;
+
+        reverseListRecursively(curr, prev);
+    }
     public static void main(String[] args) {
         Reverse reverse = new Reverse();
         reverse.insertNode(1);
@@ -67,9 +102,11 @@ class Reverse {
         reverse.insertNode(5);
         reverse.print();
 
-        reverse.reverseList();
+        reverse.reverseListIteratively();
         reverse.print();
 
+        reverse.reverseListCaller();
+        reverse.print();
 
     }
 }
