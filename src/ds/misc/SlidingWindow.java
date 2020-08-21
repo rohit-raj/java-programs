@@ -1,3 +1,5 @@
+package ds.misc;
+
 import java.util.Scanner;
 
 /**
