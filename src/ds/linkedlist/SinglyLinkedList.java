@@ -114,6 +114,30 @@ class SinglyLinkedList {
         }
     }
 
+    void deleteByValue(int value) {
+        boolean headElement = true;
+        Node curr = head;
+        Node prev = curr;
+
+        while(curr != null) {
+            if(curr.data == value) {
+                if(headElement) {
+                    head = head.next;
+                    curr = head;
+                    prev = curr;
+                } else {
+                    prev.next = curr.next;
+                    curr = curr.next;
+                    headElement = false;
+                }
+            } else {
+                prev = curr;
+                curr = curr.next;
+                headElement = false;
+            }
+        }
+    }
+
     public static void main(String[] args) {
         SinglyLinkedList linkedList = new SinglyLinkedList();
         linkedList.head = new Node(1);
@@ -135,6 +159,13 @@ class SinglyLinkedList {
         linkedList.deleteLastNode();
         linkedList.print();
         linkedList.deleteAtPosition(1);
+        linkedList.print();
+        linkedList.insertAtLast(2);
+        linkedList.insertAtLast(2);
+        linkedList.insertAtLast(4);
+        linkedList.insertAtLast(4);
+        linkedList.print();
+        linkedList.deleteByValue(4);
         linkedList.print();
     }
 }
