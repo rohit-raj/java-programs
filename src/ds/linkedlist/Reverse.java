@@ -120,6 +120,16 @@ class Reverse {
         }
     }
 
+    /**
+     * Basic idea to reverse based on position is :
+     * 1st find the last node which is not to be reversed
+     * 2nd find the first node that has to be reversed
+     * 3rd find the node that has to linked to last node(point 1)
+     * 4th find the node that has to linked to first node of step 2.
+     * PURE SINGLE ITERATION
+     * @param pos1
+     * @param pos2
+     */
     void reverseByPosition(int pos1, int pos2) {
         Node curr = head;
         Node next = null;
@@ -132,31 +142,23 @@ class Reverse {
         while(curr != null) {
             if(count == pos1) {
                 temp = curr;
-//                temp.next = null;
-//                System.out.println("temp :: "+temp.data);
             }
 
             if(count >= pos1 && count <= pos2) {
-//                System.out.println("\nif count : "+count+" & curr ele : " + curr.data+" & temp ele : "+temp.data);
-                next = curr.next;//2
-                curr.next = prev;//null
-                prev = curr;//1
-                curr = next;//2
+                next = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = next;
                 incrementLast = false;
-//                System.out.println("\nif count : "+count+" & curr ele : " + curr.data+" & temp ele : "+temp.data);
             } else {
-//                System.out.println("\nelse count : "+count+" & curr ele : " + curr.data);
                 if(incrementLast) {
                     last = curr;
-//                    System.out.println("last :: "+last.data);
                 }
                 curr = curr.next;
             }
             count++;
         }
 
-//        System.out.println("next :: "+next.data + " : link : "+ next.next);
-//        System.out.println("prev :: "+prev.data + " : link : "+ prev.next);
 
         if(pos1 == 1) {
             head.next = next;
@@ -166,8 +168,41 @@ class Reverse {
             temp.next = next;
         }
 
-//        System.out.println("outside while : next : "+ next.data + " : temp : "+ temp.data);
     }
+
+    /**
+     * Method 2 for sorting by position
+     * NOT PURE SINGLE ITERATION
+     * @param pos1
+     * @param pos2
+     */
+    void reverseByPosition2(int pos1, int pos2) {
+        Node curr = head;
+        Node prev = null;
+        Node last = null;
+
+        for(int i = 1; i < pos1; i++) {
+            last = curr;
+            curr = curr.next;
+        }
+        Node newCurr = curr;
+        System.out.println("outside while "+curr.data);
+        while(curr != null && pos1 <= pos2) {
+            Node temp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = temp;
+            pos1++;
+        }
+
+        if(last == null) {
+            head = prev;
+        } else {
+            last.next = prev;
+        }
+        newCurr.next = curr;
+    }
+
     public static void main(String[] args) {
         Reverse reverse = new Reverse();
         reverse.insertNode(1);
@@ -188,7 +223,11 @@ class Reverse {
         reverse.print();
 
         System.out.println("reverse");
-        reverse.reverseByPosition(2, 4);
+        reverse.reverseByPosition(1, 4);
+        reverse.print();
+
+        System.out.println("reverse -again ");
+        reverse.reverseByPosition2(1, 4);
         reverse.print();
 
     }
