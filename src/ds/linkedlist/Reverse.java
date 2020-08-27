@@ -29,10 +29,10 @@ class Reverse {
     void print() {
         Node curr = head;
         while (curr != null) {
-            System.out.print(curr.data + " ");
+            System.out.print(curr.data + " => ");
             curr = curr.next;
         }
-        System.out.println();
+        System.out.println("Null");
     }
 
     /**
@@ -119,6 +119,55 @@ class Reverse {
             head = next;
         }
     }
+
+    void reverseByPosition(int pos1, int pos2) {
+        Node curr = head;
+        Node next = null;
+        Node prev = null;
+        Node last = null;
+        int count = 1;
+        Node temp = null;
+        boolean incrementLast = true;
+
+        while(curr != null) {
+            if(count == pos1) {
+                temp = curr;
+//                temp.next = null;
+//                System.out.println("temp :: "+temp.data);
+            }
+
+            if(count >= pos1 && count <= pos2) {
+//                System.out.println("\nif count : "+count+" & curr ele : " + curr.data+" & temp ele : "+temp.data);
+                next = curr.next;//2
+                curr.next = prev;//null
+                prev = curr;//1
+                curr = next;//2
+                incrementLast = false;
+//                System.out.println("\nif count : "+count+" & curr ele : " + curr.data+" & temp ele : "+temp.data);
+            } else {
+//                System.out.println("\nelse count : "+count+" & curr ele : " + curr.data);
+                if(incrementLast) {
+                    last = curr;
+//                    System.out.println("last :: "+last.data);
+                }
+                curr = curr.next;
+            }
+            count++;
+        }
+
+//        System.out.println("next :: "+next.data + " : link : "+ next.next);
+//        System.out.println("prev :: "+prev.data + " : link : "+ prev.next);
+
+        if(pos1 == 1) {
+            head.next = next;
+            head = prev;
+        } else {
+            last.next = prev;
+            temp.next = next;
+        }
+
+//        System.out.println("outside while : next : "+ next.data + " : temp : "+ temp.data);
+    }
     public static void main(String[] args) {
         Reverse reverse = new Reverse();
         reverse.insertNode(1);
@@ -136,6 +185,10 @@ class Reverse {
         reverse.print();
 
         reverse.reverseUsing2Pointers();
+        reverse.print();
+
+        System.out.println("reverse");
+        reverse.reverseByPosition(2, 4);
         reverse.print();
 
     }
