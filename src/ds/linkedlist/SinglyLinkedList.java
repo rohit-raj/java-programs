@@ -138,6 +138,14 @@ class SinglyLinkedList {
         }
     }
 
+    static void printByHead(Node n) {
+        while (n != null){
+            System.out.print(n.data + " => ");
+            n = n.next;
+        }
+        System.out.println("Null");
+    }
+
     public static void main(String[] args) {
         SinglyLinkedList linkedList = new SinglyLinkedList();
         linkedList.head = new Node(1);
