@@ -1,4 +1,4 @@
-package ds.trie;
+package algo.backtracking;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,13 +79,10 @@ public class WordSearch3 {
     }
 
     public boolean basicTestFailed(char[][] board, String word, int i, int j, int idx){
-        if (i<0 || j<0 || i >= board.length || j >= board[0].length){
+        if (i<0 || j<0 || i >= board.length || j >= board[0].length || board[i][j] != word.charAt(idx)){
             return true;
         }
 
-        if(visited[i][j] || board[i][j] != word.charAt(idx)){
-            return true;
-        }
         return false;
     }
 
@@ -99,10 +96,11 @@ public class WordSearch3 {
             return;
         }
 
-        visited[i][j] = true;
+        char ch = board[i][j];
+        board[i][j] = '_';
 
         leftToRight(board, word, i, j+1, idx+1);
-        visited[i][j] = false;
+        board[i][j] = ch;
     }
 
     public void rightToLeft(char[][] board, String word, int i, int j, int idx){
@@ -115,10 +113,11 @@ public class WordSearch3 {
             return;
         }
 
-        visited[i][j] = true;
+        char ch = board[i][j];
+        board[i][j] = '_';
 
         rightToLeft(board, word, i, j-1, idx+1);//only right
-        visited[i][j] = false;
+        board[i][j] = ch;
     }
 
     public void topToBottom(char[][] board, String word, int i, int j, int idx){
@@ -131,10 +130,11 @@ public class WordSearch3 {
             return;
         }
 
-        visited[i][j] = true;
+        char ch = board[i][j];
+        board[i][j] = '_';
 
         topToBottom(board, word, i+1, j, idx+1);//only right
-        visited[i][j] = false;
+        board[i][j] = ch;
     }
 
     public void bottomToTop(char[][] board, String word, int i, int j, int idx){
@@ -147,10 +147,11 @@ public class WordSearch3 {
             return;
         }
 
-        visited[i][j] = true;
+        char ch = board[i][j];
+        board[i][j] = '_';
 
         bottomToTop(board, word, i-1, j, idx+1);//only right
-        visited[i][j] = false;
+        board[i][j] = ch;
     }
 
     public void rightAndBottom(char[][] board, String word, int i, int j, int idx){
@@ -163,11 +164,12 @@ public class WordSearch3 {
             return;
         }
 
-        visited[i][j] = true;
+        char ch = board[i][j];
+        board[i][j] = '_';
 
         rightAndBottom(board, word, i, j+1, idx+1);//only right
         rightAndBottom(board, word, i+1, j, idx+1);
-        visited[i][j] = false;
+        board[i][j] = ch;
     }
 
     public void rightAndUp(char[][] board, String word, int i, int j, int idx){
@@ -180,11 +182,12 @@ public class WordSearch3 {
             return;
         }
 
-        visited[i][j] = true;
+        char ch = board[i][j];
+        board[i][j] = '_';
 
         rightAndUp(board, word, i, j+1, idx+1);//only right
         rightAndUp(board, word, i-1, j, idx+1);
-        visited[i][j] = false;
+        board[i][j] = ch;
     }
 
     public void leftAndBottom(char[][] board, String word, int i, int j, int idx){
@@ -197,11 +200,12 @@ public class WordSearch3 {
             return;
         }
 
-        visited[i][j] = true;
+        char ch = board[i][j];
+        board[i][j] = '_';
 
         leftAndBottom(board, word, i, j-1, idx+1);//only right
         leftAndBottom(board, word, i+1, j, idx+1);
-        visited[i][j] = false;
+        board[i][j] = ch;
     }
 
     public void leftAndUp(char[][] board, String word, int i, int j, int idx){
@@ -214,11 +218,12 @@ public class WordSearch3 {
             return;
         }
 
-        visited[i][j] = true;
+        char ch = board[i][j];
+        board[i][j] = '_';
 
         leftAndUp(board, word, i, j-1, idx+1);//only right
         leftAndUp(board, word, i-1, j, idx+1);
-        visited[i][j] = false;
+        board[i][j] = ch;
     }
 
     public void rightBottomDiagonal(char[][] board, String word, int i, int j, int idx){
@@ -231,10 +236,11 @@ public class WordSearch3 {
             return;
         }
 
-        visited[i][j] = true;
+        char ch = board[i][j];
+        board[i][j] = '_';
 
         rightBottomDiagonal(board, word, i+1, j+1, idx+1);//only right
-        visited[i][j] = false;
+        board[i][j] = ch;
     }
 
     public void rightTopDiagonal(char[][] board, String word, int i, int j, int idx){
@@ -247,10 +253,11 @@ public class WordSearch3 {
             return;
         }
 
-        visited[i][j] = true;
+        char ch = board[i][j];
+        board[i][j] = '_';
 
         rightTopDiagonal(board, word, i-1, j+1, idx+1);//only right
-        visited[i][j] = false;
+        board[i][j] = ch;
     }
 
     public void leftBottomDiagonal(char[][] board, String word, int i, int j, int idx){
@@ -263,10 +270,11 @@ public class WordSearch3 {
             return;
         }
 
-        visited[i][j] = true;
+        char ch = board[i][j];
+        board[i][j] = '_';
 
         leftBottomDiagonal(board, word, i+1, j-1, idx+1);//only right
-        visited[i][j] = false;
+        board[i][j] = ch;
     }
 
     public void leftTopDiagonal(char[][] board, String word, int i, int j, int idx){
@@ -279,10 +287,11 @@ public class WordSearch3 {
             return;
         }
 
-        visited[i][j] = true;
+        char ch = board[i][j];
+        board[i][j] = '_';
 
         leftTopDiagonal(board, word, i-1, j-1, idx+1);//only right
-        visited[i][j] = false;
+        board[i][j] = ch;
     }
 
     public static void main(String[] args) {
