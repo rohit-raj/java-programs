@@ -26,7 +26,7 @@ public class RemoveElement {
         for(int x : inp) {
             System.out.print(x+" ");
         }
-        int out = removeElements(inp, 0);
+        int out = removeElements(inp, 2);
         System.out.println();
         for(int i = 0; i < out; i++) {
             System.out.print(inp[i] +" ");
