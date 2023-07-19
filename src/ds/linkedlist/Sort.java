@@ -9,7 +9,7 @@ import java.util.Random;
 /**
  * merge sort on linked list
  */
-public class Sort extends SinglyLinkedList {
+public class Sort {
 
     static Node sortedMerge(Node left, Node right) {
         Node result;
@@ -28,18 +28,67 @@ public class Sort extends SinglyLinkedList {
         return result;
     }
 
-    static Node mergeSort(Node node){
-        if(node == null || node.next == null) return node;
+    /**
+     * Below uses the O(n) space only to merge
+     */
+    static Node sortedMerge2(Node left, Node right){
+        Node dummy = new Node(0);
+        Node tail = dummy;
 
-        Node middle = findMiddle(node);
-        Node nextOfMiddle = middle.next;
+        while (true) {
 
-        middle.next = null;
+            if (left == null){
+                tail.next = right;
+                break;
+            }
 
-        Node left = mergeSort(node);
+            if (right == null){
+                tail.next = left;
+                break;
+            }
 
-        Node right = mergeSort(nextOfMiddle);
-        return sortedMerge(left, right);
+            if(left.data <= right.data){
+                tail.next = left;
+                left = left.next;
+            } else {
+                tail.next = right;
+                right = right.next;
+            }
+
+            tail = tail.next;
+        }
+        return dummy.next;
+    }
+
+    static Node sortedMerge3(Node left, Node right){
+        if(left == null) return right;
+
+        if(right == null) return left;
+
+        if(left.data > right.data){
+
+            Node temp = left;
+            left = right;
+            right = temp;
+        }
+
+        Node res = left;
+
+        while(left != null && right != null){
+            Node temp = null;
+
+
+            while(left != null && left.data <= right.data){
+                temp= left;
+                left = left.next;
+            }
+            temp.next = right;
+
+            Node temp2 = right;
+            right = left;
+            left = temp2;
+        }
+        return res;
     }
 
     static Node findMiddle (Node head){
@@ -57,20 +106,29 @@ public class Sort extends SinglyLinkedList {
         return slowPtr;
     }
 
+    public static Node mergeSort(Node node){
+        if(node == null || node.next == null) return node;
+
+        Node middle = findMiddle(node);
+        Node nextOfMiddle = middle.next;
+
+        middle.next = null;
+
+        Node left = mergeSort(node);
+
+        Node right = mergeSort(nextOfMiddle);
+        return sortedMerge3(left, right);
+    }
+
     public static void main(String[] args) {
-        Random random = new Random();
-        int lLSize = random.nextInt(10);
-        SinglyLinkedList ll = new SinglyLinkedList();
-        for(int j = 0; j < lLSize; j++) {
-            int x = random.nextInt(50);
-            ll.insertAtStart(x);
-        }
+        SinglyLinkedList sll = new SinglyLinkedList();
+        Node ll = sll.createRandomList();
 
-        ll.print();
-        System.out.println("======Output======");
+        sll.printByHead(ll);
+        System.out.println("======***Output***======");
 
-        ll.head = mergeSort(ll.head);
+        ll = mergeSort(ll);
 
-        SinglyLinkedList.printByHead(ll.head);
+        sll.printByHead(ll);
     }
 }

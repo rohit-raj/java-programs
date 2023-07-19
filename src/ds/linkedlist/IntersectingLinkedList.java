@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * question : https://leetcode.com/problems/intersection-of-two-linked-lists/solution/
+ * question : https://leetcode.com/problems/intersection-of-two-linked-lists/
  */
 public class IntersectingLinkedList {
     Node head;

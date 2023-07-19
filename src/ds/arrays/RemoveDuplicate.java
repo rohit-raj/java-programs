@@ -1,4 +1,4 @@
-package algo.arrays;
+package ds.arrays;
 
 /**
  * Created by rohit on 25/09/20.

@@ -203,6 +203,18 @@ class Reverse {
         newCurr.next = curr;
     }
 
+    Node reverseRecur(Node head){
+        if(head==null ||head.next==null){
+            return head;
+        }
+
+        Node temp = reverseRecur(head.next);
+        head.next.next = head;
+        head.next = null;
+        return temp;
+
+    }
+
     public static void main(String[] args) {
         Reverse reverse = new Reverse();
         reverse.insertNode(1);
@@ -222,13 +234,24 @@ class Reverse {
         reverse.reverseUsing2Pointers();
         reverse.print();
 
-        System.out.println("reverse");
-        reverse.reverseByPosition(1, 4);
-        reverse.print();
+//        System.out.println("reverse");
+//        reverse.reverseByPosition(1, 4);
+//        reverse.print();
 
-        System.out.println("reverse -again ");
-        reverse.reverseByPosition2(1, 4);
-        reverse.print();
+//        System.out.println("reverse -again ");
+//        reverse.reverseByPosition2(1, 4);
+//        reverse.print();
 
+        Node newHead = reverse.reverseRecur(reverse.head);
+        reverse.printByHead(newHead);
+
+    }
+
+    void printByHead(Node n) {
+        while (n != null){
+            System.out.print(n.data + " => ");
+            n = n.next;
+        }
+        System.out.println("Null");
     }
 }

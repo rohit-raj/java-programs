@@ -18,7 +18,7 @@ public class Stack {
             return false;
         } else {
             a[++top] = x;
-            System.out.println("Element pushed");
+//            System.out.println("Element pushed");
             return true;
         }
     }
@@ -37,6 +37,7 @@ public class Stack {
         for(int i = 0; i < top+1; i++){
             System.out.println(a[i]);
         }
+        System.out.println();
     }
 
     public static void main(String[] args) {
@@ -51,6 +52,6 @@ public class Stack {
         s.print();
         System.out.println(s.pop() + " Element popped");
 
-        s.print();
+//        s.print();
     }
 }

@@ -1,4 +1,4 @@
-package algo.arrays;
+package ds.arrays;
 
 import java.util.HashSet;
 

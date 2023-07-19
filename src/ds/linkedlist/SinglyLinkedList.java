@@ -1,37 +1,37 @@
 package ds.linkedlist;
 
-class SinglyLinkedList {
-    Node head;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
-    static class Node{
-        int data;
-        Node next;
-        Node(int item){
-            data = item;
-            next = null;
-        }
-    }
+public class SinglyLinkedList {
 
-    void insertAtStart(int item){
+    public Node insertAtStart(Node head, int item){
         Node n = new Node(item);
+        if(head == null) {
+            head = n;
+            return head;
+        }
         n.next = head;
         head = n;
+        return head;
     }
 
-    void insertAtLast(int item){
+    public Node insertAtLast(Node head, int item){
         Node n = new Node(item);
         if(head == null){
             head = n;
-            return;
+            return head;
         }
         Node curr = head;
         while (curr.next != null) {
             curr = curr.next;
         }
         curr.next = n;
+        return head;
     }
 
-    void insertAtPosition(int item, int pos){
+    public void insertAtPosition(Node head, int item, int pos){
         if(pos <=0){
             System.out.println("Incorrect position");
             return;
@@ -59,7 +59,7 @@ class SinglyLinkedList {
         }
     }
 
-    void print(){
+    public void print(Node head){
         Node n = head;
         while (n != null){
             System.out.print(n.data + " => ");
@@ -68,77 +68,81 @@ class SinglyLinkedList {
         System.out.println("Null");
     }
 
-    void deleteFirstNode(){
-        head = head.next;
-    }
+    public boolean search(Node head, int key){
+        if(head == null) return false;
 
-    void deleteLastNode(){
         Node curr = head;
-        Node prev = curr;
-        while (curr != null){
-            if(curr.next == null){
-                curr = null;
-                prev.next = null;
-                return;
-            } else {
-                prev = curr;
-                curr = curr.next;
+        while (curr.next != null){
+            if(curr.data == key){
+                return true;
             }
+            curr = curr.next;
         }
+        return false;
     }
 
-    void deleteAtPosition(int pos){
-        if(pos <= 0){
-            System.out.println("Cannot delete : index less than 1");
-            return;
+    public Node createRandomList() {
+        Random random = new Random();
+        int lLSize = random.nextInt(10);
+        Node head = null;
+        for(int j = 0; j < lLSize; j++) {
+            int x = random.nextInt(50);
+            head = insertAtStart(head, x);
         }
-        if(pos == 1){
-            head = head.next;
-            return;
+        return head;
+    }
+
+    public Node createListFromItems(int[] items){
+        Node head = null;
+        for(int item : items) {
+            head = insertAtLast(head, item);
         }
-        int count = 0;
+        return head;
+    }
+
+    public Node duplicateList(Node head){
         Node curr = head;
-        Node prev = curr;
+        Node dup = null;
+        while (curr != null){
+            dup = insertAtLast(dup, curr.data);
+            curr = curr.next;
+        }
+        return dup;
+    }
+
+    public int getLength(Node head){
+        if(head == null){
+            return 0;
+        }
+        if(head.next == null){
+            return 1;
+        }
+
+        Node curr = head;
+        int count = 0;
         while (curr != null){
             count++;
-            if(pos == count){
-                prev.next = curr.next;
-                return;
-            } else{
-                prev = curr;
-                curr = curr.next;
-            }
+            curr = curr.next;
         }
-        if(pos > count){
-            System.out.println("Cannot delete: index is greater than the list length");
-        }
+
+        return count;
     }
 
-    void deleteByValue(int value) {
-        boolean headElement = true;
-        Node curr = head;
-        Node prev = curr;
-
-        while(curr != null) {
-            if(curr.data == value) {
-                if(headElement) {
-                    head = head.next;
-                    curr = head;
-                    prev = curr;
-                } else {
-                    prev.next = curr.next;
-                    curr = curr.next;
-                    headElement = false;
-                }
-            } else {
-                prev = curr;
-                curr = curr.next;
-                headElement = false;
-            }
+    public Node getMid(Node head){
+        if (head == null){
+            System.out.println("No nodes present");
+            return head;
         }
+        Node fast = head;
+        Node slow = head;
+        while ((fast.next != null) && (fast.next.next != null)) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
     }
 
-    static void printByHead(Node n) {
+    public void printByHead(Node n) {
         while (n != null){
             System.out.print(n.data + " => ");
             n = n.next;
@@ -146,34 +150,77 @@ class SinglyLinkedList {
         System.out.println("Null");
     }
 
+    public Node removeDuplicateBrute(Node head){
+        if(head == null || head.next == null) return head;
+
+        Node curr = head;
+        Set<Integer> set = new HashSet<>();
+        while (curr != null){
+            set.add(curr.data);
+            curr = curr.next;
+        }
+
+        Node dummy = new Node(0);
+        Node temp = dummy;
+        for (int item : set){
+            temp.next = new Node(item);
+            temp = temp.next;
+        }
+        return dummy.next;
+    }
+
+    public Node removeDuplicateOptimal(Node head){
+        if(head == null || head.next == null) return head;
+
+        Node curr = head;
+
+        while (curr != null  && curr.next != null){
+            if(curr.data != curr.next.data){
+                curr = curr.next;
+            } else {
+                curr.next = curr.next.next;
+            }
+        }
+
+        return head;
+    }
+
     public static void main(String[] args) {
-        SinglyLinkedList linkedList = new SinglyLinkedList();
-        linkedList.head = new Node(1);
-        Node second = new Node(2);
-        Node third = new Node(3);
+        SinglyLinkedList sll = new SinglyLinkedList();
+        Node head = new Node(1);
+//        Node second = new Node(2);
+//        Node third = new Node(3);
+//
+//        sll.head.next = second;
+//        second.next = third;
 
-        linkedList.head.next = second;
-        second.next = third;
+//        sll.print();
+//        sll.insertAtStart(0);
+//        sll.print();
+//        sll.insertAtLast(4);
+//        sll.print();
+//        sll.insertAtPosition(5, 1);
+//        sll.print();
+//        sll.deleteFirstNodexxx();
+//        sll.print();
+//        sll.deleteLastNodexxx();
+//        sll.print();
+//        sll.deleteAtPosition(1);
+//        sll.print();
+//        sll.insertAtLast(2);
+//        sll.insertAtLast(2);
+        sll.insertAtLast(head, 1);
+        sll.insertAtLast(head, 2);
+        sll.insertAtLast(head, 3);
+        sll.insertAtLast(head, 3);
+        sll.print(head);
+//        sll.deleteByValue(4);
+//        sll.print();
+//        System.out.println("item found : "+ sll.search(head, 2));
 
-        linkedList.print();
-        linkedList.insertAtStart(0);
-        linkedList.print();
-        linkedList.insertAtLast(4);
-        linkedList.print();
-        linkedList.insertAtPosition(5, 1);
-        linkedList.print();
-        linkedList.deleteFirstNode();
-        linkedList.print();
-        linkedList.deleteLastNode();
-        linkedList.print();
-        linkedList.deleteAtPosition(1);
-        linkedList.print();
-        linkedList.insertAtLast(2);
-        linkedList.insertAtLast(2);
-        linkedList.insertAtLast(4);
-        linkedList.insertAtLast(4);
-        linkedList.print();
-        linkedList.deleteByValue(4);
-        linkedList.print();
+        System.out.println("res :: ");
+//        Node res = sll.removeDuplicateBrute(head);
+        Node res = sll.duplicateList(head);
+        sll.printByHead(res);
     }
 }

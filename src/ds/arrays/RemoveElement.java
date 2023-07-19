@@ -1,4 +1,4 @@
-package algo.arrays;
+package ds.arrays;
 
 /**
  * https://leetcode.com/problems/remove-element/

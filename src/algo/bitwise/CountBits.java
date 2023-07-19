@@ -24,7 +24,7 @@ class CountBits {
     }
 
     public static void main(String[] args) {
-        int a = 4;
+        int a = 3;
         System.out.println("set bit count = " + countSetBitsUtil(a));
 
     }
