@@ -49,34 +49,37 @@ public class WordSearch3 {
     int leftTopDiagonal = 0;
 
 
-    public boolean searchWord(char[][] board, String word, int m, int n){
+    public void check(char[][] board, String word){
+        int m = board.length;
+        int n = board[0].length;
+        visited = new boolean[m][n];
+
         for(int i=0;i<m;i++){
             for (int j=0;j<n;j++) {
                 if(board[i][j] == word.charAt(0)){
-                    searchWord(board, word, m, n, i, j, 0);
+                    searchWord(board, word, i, j, 0);
                 }
             }
         }
-        return false;
     }
 
-    public void searchWord(char[][] board, String word, int m, int n, int i, int j, int idx){
-        leftToRight(board, word, m, n, i, j, 0);
-        rightToLeft(board, word, m, n, i, j, 0);
-        topToBottom(board, word, m, n, i, j, 0);
-        bottomToTop(board, word, m, n, i, j, 0);
-        rightAndBottom(board, word, m, n, i, j, 0);
-        rightAndUp(board, word, m, n, i, j, 0);
-        leftAndBottom(board, word, m, n, i, j, 0);
-        leftAndUp(board, word, m, n, i, j, 0);
-        rightBottomDiagonal(board, word, m, n, i, j, 0);
-        rightTopDiagonal(board, word, m, n, i, j, 0);
-        leftBottomDiagonal(board, word, m, n, i, j, 0);
-        leftTopDiagonal(board, word, m, n, i, j, 0);
+    public void searchWord(char[][] board, String word, int i, int j, int idx){
+        leftToRight(board, word, i, j, 0);
+        rightToLeft(board, word, i, j, 0);
+        topToBottom(board, word, i, j, 0);
+        bottomToTop(board, word, i, j, 0);
+        rightAndBottom(board, word, i, j, 0);
+        rightAndUp(board, word, i, j, 0);
+        leftAndBottom(board, word, i, j, 0);
+        leftAndUp(board, word, i, j, 0);
+        rightBottomDiagonal(board, word, i, j, 0);
+        rightTopDiagonal(board, word, i, j, 0);
+        leftBottomDiagonal(board, word, i, j, 0);
+        leftTopDiagonal(board, word, i, j, 0);
     }
 
-    public boolean basicTestFailed(char[][] board, String word, int m, int n, int i, int j, int idx){
-        if (i<0 || j<0 || i >= m || j >= n){
+    public boolean basicTestFailed(char[][] board, String word, int i, int j, int idx){
+        if (i<0 || j<0 || i >= board.length || j >= board[0].length){
             return true;
         }
 
@@ -86,8 +89,8 @@ public class WordSearch3 {
         return false;
     }
 
-    public void leftToRight(char[][] board, String word, int m, int n, int i, int j, int idx){
-        if(basicTestFailed(board, word, m, n, i, j, idx)) return;
+    public void leftToRight(char[][] board, String word, int i, int j, int idx){
+        if(basicTestFailed(board, word, i, j, idx)) return;
 
         if(idx+1 >= word.length()){
             foundWords.add(word);
@@ -98,12 +101,12 @@ public class WordSearch3 {
 
         visited[i][j] = true;
 
-        leftToRight(board, word, m, n, i, j+1, idx+1);
+        leftToRight(board, word, i, j+1, idx+1);
         visited[i][j] = false;
     }
 
-    public void rightToLeft(char[][] board, String word, int m, int n, int i, int j, int idx){
-        if(basicTestFailed(board, word, m, n, i, j, idx)) return;
+    public void rightToLeft(char[][] board, String word, int i, int j, int idx){
+        if(basicTestFailed(board, word, i, j, idx)) return;
 
         if(idx+1 >= word.length()){
             foundWords.add(word);
@@ -114,12 +117,12 @@ public class WordSearch3 {
 
         visited[i][j] = true;
 
-        rightToLeft(board, word, m, n, i, j-1, idx+1);//only right
+        rightToLeft(board, word, i, j-1, idx+1);//only right
         visited[i][j] = false;
     }
 
-    public void topToBottom(char[][] board, String word, int m, int n, int i, int j, int idx){
-        if(basicTestFailed(board, word, m, n, i, j, idx)) return;
+    public void topToBottom(char[][] board, String word, int i, int j, int idx){
+        if(basicTestFailed(board, word, i, j, idx)) return;
 
         if(idx+1 >= word.length()){
             foundWords.add(word);
@@ -130,12 +133,12 @@ public class WordSearch3 {
 
         visited[i][j] = true;
 
-        topToBottom(board, word, m, n, i+1, j, idx+1);//only right
+        topToBottom(board, word, i+1, j, idx+1);//only right
         visited[i][j] = false;
     }
 
-    public void bottomToTop(char[][] board, String word, int m, int n, int i, int j, int idx){
-        if(basicTestFailed(board, word, m, n, i, j, idx)) return;
+    public void bottomToTop(char[][] board, String word, int i, int j, int idx){
+        if(basicTestFailed(board, word, i, j, idx)) return;
 
         if(idx+1 >= word.length()){
             foundWords.add(word);
@@ -146,12 +149,12 @@ public class WordSearch3 {
 
         visited[i][j] = true;
 
-        bottomToTop(board, word, m, n, i-1, j, idx+1);//only right
+        bottomToTop(board, word, i-1, j, idx+1);//only right
         visited[i][j] = false;
     }
 
-    public void rightAndBottom(char[][] board, String word, int m, int n, int i, int j, int idx){
-        if(basicTestFailed(board, word, m, n, i, j, idx)) return;
+    public void rightAndBottom(char[][] board, String word, int i, int j, int idx){
+        if(basicTestFailed(board, word, i, j, idx)) return;
 
         if(idx+1 >= word.length()){
             foundWords.add(word);
@@ -162,13 +165,13 @@ public class WordSearch3 {
 
         visited[i][j] = true;
 
-        rightAndBottom(board, word, m, n, i, j+1, idx+1);//only right
-        rightAndBottom(board, word, m, n, i+1, j, idx+1);
+        rightAndBottom(board, word, i, j+1, idx+1);//only right
+        rightAndBottom(board, word, i+1, j, idx+1);
         visited[i][j] = false;
     }
 
-    public void rightAndUp(char[][] board, String word, int m, int n, int i, int j, int idx){
-        if(basicTestFailed(board, word, m, n, i, j, idx)) return;
+    public void rightAndUp(char[][] board, String word, int i, int j, int idx){
+        if(basicTestFailed(board, word, i, j, idx)) return;
 
         if(idx+1 >= word.length()){
             foundWords.add(word);
@@ -179,13 +182,13 @@ public class WordSearch3 {
 
         visited[i][j] = true;
 
-        rightAndUp(board, word, m, n, i, j+1, idx+1);//only right
-        rightAndUp(board, word, m, n, i-1, j, idx+1);
+        rightAndUp(board, word, i, j+1, idx+1);//only right
+        rightAndUp(board, word, i-1, j, idx+1);
         visited[i][j] = false;
     }
 
-    public void leftAndBottom(char[][] board, String word, int m, int n, int i, int j, int idx){
-        if(basicTestFailed(board, word, m, n, i, j, idx)) return;
+    public void leftAndBottom(char[][] board, String word, int i, int j, int idx){
+        if(basicTestFailed(board, word, i, j, idx)) return;
 
         if(idx+1 >= word.length()){
             foundWords.add(word);
@@ -196,13 +199,13 @@ public class WordSearch3 {
 
         visited[i][j] = true;
 
-        leftAndBottom(board, word, m, n, i, j-1, idx+1);//only right
-        leftAndBottom(board, word, m, n, i+1, j, idx+1);
+        leftAndBottom(board, word, i, j-1, idx+1);//only right
+        leftAndBottom(board, word, i+1, j, idx+1);
         visited[i][j] = false;
     }
 
-    public void leftAndUp(char[][] board, String word, int m, int n, int i, int j, int idx){
-        if(basicTestFailed(board, word, m, n, i, j, idx)) return;
+    public void leftAndUp(char[][] board, String word, int i, int j, int idx){
+        if(basicTestFailed(board, word, i, j, idx)) return;
 
         if(idx+1 >= word.length()){
             foundWords.add(word);
@@ -213,13 +216,13 @@ public class WordSearch3 {
 
         visited[i][j] = true;
 
-        leftAndUp(board, word, m, n, i, j-1, idx+1);//only right
-        leftAndUp(board, word, m, n, i-1, j, idx+1);
+        leftAndUp(board, word, i, j-1, idx+1);//only right
+        leftAndUp(board, word, i-1, j, idx+1);
         visited[i][j] = false;
     }
 
-    public void rightBottomDiagonal(char[][] board, String word, int m, int n, int i, int j, int idx){
-        if(basicTestFailed(board, word, m, n, i, j, idx)) return;
+    public void rightBottomDiagonal(char[][] board, String word, int i, int j, int idx){
+        if(basicTestFailed(board, word, i, j, idx)) return;
 
         if(idx+1 >= word.length()){
             foundWords.add(word);
@@ -230,12 +233,12 @@ public class WordSearch3 {
 
         visited[i][j] = true;
 
-        rightBottomDiagonal(board, word, m, n, i+1, j+1, idx+1);//only right
+        rightBottomDiagonal(board, word, i+1, j+1, idx+1);//only right
         visited[i][j] = false;
     }
 
-    public void rightTopDiagonal(char[][] board, String word, int m, int n, int i, int j, int idx){
-        if(basicTestFailed(board, word, m, n, i, j, idx)) return;
+    public void rightTopDiagonal(char[][] board, String word, int i, int j, int idx){
+        if(basicTestFailed(board, word, i, j, idx)) return;
 
         if(idx+1 >= word.length()){
             foundWords.add(word);
@@ -246,12 +249,12 @@ public class WordSearch3 {
 
         visited[i][j] = true;
 
-        rightTopDiagonal(board, word, m, n, i-1, j+1, idx+1);//only right
+        rightTopDiagonal(board, word, i-1, j+1, idx+1);//only right
         visited[i][j] = false;
     }
 
-    public void leftBottomDiagonal(char[][] board, String word, int m, int n, int i, int j, int idx){
-        if(basicTestFailed(board, word, m, n, i, j, idx)) return;
+    public void leftBottomDiagonal(char[][] board, String word, int i, int j, int idx){
+        if(basicTestFailed(board, word, i, j, idx)) return;
 
         if(idx+1 >= word.length()){
             foundWords.add(word);
@@ -262,12 +265,12 @@ public class WordSearch3 {
 
         visited[i][j] = true;
 
-        leftBottomDiagonal(board, word, m, n, i+1, j-1, idx+1);//only right
+        leftBottomDiagonal(board, word, i+1, j-1, idx+1);//only right
         visited[i][j] = false;
     }
 
-    public void leftTopDiagonal(char[][] board, String word, int m, int n, int i, int j, int idx){
-        if(basicTestFailed(board, word, m, n, i, j, idx)) return;
+    public void leftTopDiagonal(char[][] board, String word, int i, int j, int idx){
+        if(basicTestFailed(board, word, i, j, idx)) return;
 
         if(idx+1 >= word.length()){
             foundWords.add(word);
@@ -278,27 +281,25 @@ public class WordSearch3 {
 
         visited[i][j] = true;
 
-        leftTopDiagonal(board, word, m, n, i-1, j-1, idx+1);//only right
+        leftTopDiagonal(board, word, i-1, j-1, idx+1);//only right
         visited[i][j] = false;
     }
 
     public static void main(String[] args) {
         char[][] board = {
-            "aa".toCharArray(),
-            "aa".toCharArray(),
-//            "ssss".toCharArray()
+                "oaan".toCharArray(),
+                "etae".toCharArray(),
+                "iakr".toCharArray(),
+                "ifav".toCharArray()
         };
         String word = "aa";
 
-        int m = board.length;
-        int n = board[0].length;
         System.out.println("search word "+word+" in board");
         System.out.println("============================================");
         WordSearch3 ws = new WordSearch3();
-        ws.visited = new boolean[m][n];
         ws.foundWords = new ArrayList<>();
 
-        boolean res = ws.searchWord(board, word, m, n);
+        ws.check(board, word);
         System.out.println("totalCount : "+ ws.totalCount);
         System.out.println("leftToRight : "+ ws.leftToRight);
         System.out.println("rightToLeft : "+ ws.rightToLeft);
