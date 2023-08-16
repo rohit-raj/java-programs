@@ -4,7 +4,7 @@ package algo.strings;
  * https://leetcode.com/problems/string-to-integer-atoi/description/
  */
 public class AsciiToInt {
-    public static int myAtoi(String str) {
+    public static int myAtoiA(String str) {
         int sign = 1;
         int result = 0;
         int i = 0;
@@ -24,6 +24,34 @@ public class AsciiToInt {
             result = result *10 + (str.charAt(i++) - '0');
         }
         return result * sign;
+    }
+
+    public static int myAtoi(String s) {
+        boolean isWhitespace = true;
+        char sign = '+';
+        String digits = "";
+        for(int i=0; i<s.length(); i++){
+            char value = s.charAt(i);
+            boolean isNum = Character.isDigit(value);
+
+            if(value == ' ' && isWhitespace){
+                continue;
+            }else if(i != s.length()-1 && digits.equals("") && (value == '+' || value == '-')){
+                isWhitespace = false;
+                sign = value;
+            }else if(isNum){
+                isWhitespace = false;
+                digits = digits + value;
+            }else if(!digits.equals("") && !isNum){
+                break;
+            }
+
+        }
+        int ans = Integer.parseInt(digits);
+        if(sign == '-'){
+            ans = -ans;
+        }
+        return ans;
     }
 
     public static void main(String[] args) {

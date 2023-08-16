@@ -48,6 +48,9 @@ class Trie {
         return root.getWordCount();
     }
 
+    public void printTrieTree(TrieNode root) {
+        printTrieTree(root, "", true);
+    }
     public void printTrieTree(TrieNode root, String prefix, boolean isLast) {
         System.out.print(prefix);
         System.out.print(isLast ? "└── " : "├── ");

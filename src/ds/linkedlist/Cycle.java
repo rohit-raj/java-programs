@@ -63,6 +63,25 @@ public class Cycle {
         ptrB.next=ptrA;
     }
 
+    Node detectCycle(Node head) {
+        Node slow = head;
+        Node fast = head;
+
+        while (fast!=null && fast.next!=null){
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow){
+                fast = head;
+                while(slow != fast) {
+                    slow = slow.next;
+                    fast = fast.next;
+                }
+                return slow;
+            }
+        }
+        return null;
+    }
+
 
     public static void main(String[] args) {
         Cycle cycle = new Cycle();

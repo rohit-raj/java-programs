@@ -7,12 +7,14 @@ public class TrieNode {
     boolean isEnd=false;
     int endsWith;
     int commonPrefix;
+    String word;
 
     public TrieNode() {
         childNode = new TrieNode[R];
         isEnd=false;
         endsWith = 0;
         commonPrefix = 0;
+        word = "";
     }
 
     public boolean containsKey(char ch) {

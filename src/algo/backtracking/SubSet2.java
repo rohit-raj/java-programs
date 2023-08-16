@@ -6,7 +6,7 @@ import java.util.*;
  * https://leetcode.com/problems/subsets-ii/
  *
  */
-public class SubSetSum2 {
+public class SubSet2 {
 
     static List<List<Integer>> subsetsWithoutDupBetter(int[] nums) {
         Arrays.sort(nums);
