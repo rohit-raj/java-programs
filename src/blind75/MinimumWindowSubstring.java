@@ -16,6 +16,7 @@ public class MinimumWindowSubstring {
         HashMap<Character, Integer> map = new HashMap<>();
 
         for(char c : t.toCharArray()) map.put(c, map.getOrDefault(c, 0)+1);
+        System.out.println("elements : "+ map + " : minLen : "+ minLen);
 
         for(int endWindow=0;endWindow<s.length();endWindow++){
             char right = s.charAt(endWindow);
@@ -23,6 +24,7 @@ public class MinimumWindowSubstring {
                 map.put(right, map.get(right) - 1);
                 if (map.get(right) == 0) matched++;
             }
+            System.out.println("elements after : "+ right + " map  :: "+ map + " : matched  : "+ matched + " : map.size() : "+ map.size());
 
             while (matched == map.size()){
                 if(minLen >= endWindow-start+1){
@@ -30,6 +32,7 @@ public class MinimumWindowSubstring {
                     subStrStart = start;
                 }
                 char deleted = s.charAt(start++);
+                System.out.println("deleted : "+ deleted + " : start : "+ start + " : map[deleted] : "+ map.containsKey(deleted));
                 if(map.containsKey(deleted)){
                     if (map.get(deleted) == 0) matched--;
                     map.put(deleted, map.get(deleted) + 1);
@@ -44,6 +47,10 @@ public class MinimumWindowSubstring {
         String s = "ADOBECODEBANC";
         String t = "ABC";
 
+        String[] chain = {"O", "C", "Ra", "Li", "Na"};
+        String[] elements = {"Li", "C"};
+
         System.out.println("Min window : "+ minWindow(s, t));
+//        System.out.println("Min window : "+ minWindow(s, t));
     }
 }

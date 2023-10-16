@@ -7,6 +7,7 @@ public class Node {
     public Node left;
     public Node right;
     public Node next;
+    public String stringData;
 
     public Node(){}
 
@@ -19,6 +20,11 @@ public class Node {
     public Node(int _key, int _val){
         key = _key;
         val = _val;
+        left=right=next=null;
+    }
+
+    public Node(String _data){
+        stringData = _data;
         left=right=next=null;
     }
 }

@@ -9,7 +9,7 @@ public class MinimumWindowSubstring {
 
     public static String minWindow(String s, String t) {
         int start=0;
-        int minLen = s.length();
+        int minLen = s.length()+1;
         int matched = 0;
         int subStrStart = 0;
 

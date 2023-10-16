@@ -86,7 +86,7 @@ public class SinglyLinkedList {
         int lLSize = random.nextInt(10);
         Node head = null;
         for(int j = 0; j < lLSize; j++) {
-            int x = random.nextInt(50);
+            int x = random.nextInt(10);
             head = insertAtStart(head, x);
         }
         return head;

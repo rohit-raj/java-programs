@@ -4,10 +4,10 @@ public class TrieNode {
     TrieNode[] childNode;
     int wordCount=0;
     final int R = 26;
-    boolean isEnd=false;
-    int endsWith;
-    int commonPrefix;
-    String word;
+    public boolean isEnd=false;
+    public int endsWith;
+    public int commonPrefix;
+    public String word;
 
     public TrieNode() {
         childNode = new TrieNode[R];
@@ -44,7 +44,12 @@ public class TrieNode {
     public int getWordCount(){
         return wordCount;
     }
+
     public void incrementWordCount(){
         wordCount+=1;
+    }
+
+    public void setWord(String word){
+        this.word = word;
     }
 }

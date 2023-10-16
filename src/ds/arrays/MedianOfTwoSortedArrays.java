@@ -64,11 +64,11 @@ public class MedianOfTwoSortedArrays {
         int low = 0, high=n1;
 
         while (low <= high){
-            int cut1 = (low+high) >> 1;
+            int cut1 = low + (high-low)/2;
             int cut2 = (n1+n2+1)/2-cut1;
 
             int left1 = cut1 == 0 ? Integer.MIN_VALUE : num1[cut1-1];
-            int left2 = cut2 == 0 ? Integer.MIN_VALUE : num2[cut2 -1];
+            int left2 = cut2 == 0 ? Integer.MIN_VALUE : num2[cut2-1];
 
             int right1 = cut1 == n1 ? Integer.MAX_VALUE : num1[cut1];
             int right2 = cut2 == n2 ? Integer.MAX_VALUE : num2[cut2];
@@ -90,8 +90,8 @@ public class MedianOfTwoSortedArrays {
     }
 
     public static void main(String[] args) {
-        int[] arr1 = {1,3,4,5};
-        int[] arr2 = {2,7,8,9};
+        int[] arr1 = {};
+        int[] arr2 = {2};
 
         int[] res = mergeSorted(arr1, arr2);
 

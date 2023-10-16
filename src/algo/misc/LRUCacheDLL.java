@@ -72,7 +72,7 @@ public class LRUCacheDLL {
     }
 
     public static void main(String[] args) {
-        LRUCacheDLL lRUCache = new LRUCacheDLL(2);
+        LRUCacheDLL lRUCache = new LRUCacheDLL(5);
         lRUCache.put(1, 1); // cache is {1=1}
         lRUCache.put(2, 2); // cache is {1=1, 2=2}
         lRUCache.printFromHead(lRUCache.head);
@@ -81,6 +81,9 @@ public class LRUCacheDLL {
         lRUCache.printFromHead(lRUCache.head);
         System.out.println(lRUCache.get(2));    // returns -1 (not found)
         lRUCache.put(4, 4); // LRU key was 1, evicts key 1, cache is {4=4, 3=3}
+        lRUCache.put(2, 2); // LRU key was 1, evicts key 1, cache is {4=4, 3=3}
+        lRUCache.put(2, 2); // LRU key was 1, evicts key 1, cache is {4=4, 3=3}
+        lRUCache.printFromHead(lRUCache.head);
         System.out.println(lRUCache.get(1));    // return -1 (not found)
         System.out.println(lRUCache.get(3));    // return 3
         System.out.println(lRUCache.get(4));    // return 4

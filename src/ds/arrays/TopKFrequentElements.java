@@ -14,8 +14,7 @@ public class TopKFrequentElements {
             map.put(num, map.getOrDefault(num, 0) + 1);
         }
 
-        Queue<Integer> heap = new PriorityQueue<>(
-                (a, b) ->map.get(a) - map.get(b));
+        Queue<Integer> heap = new PriorityQueue<>( (a, b) ->map.get(a) - map.get(b));
 
         for(int key : map.keySet()){
             System.out.println("adding "+ key);

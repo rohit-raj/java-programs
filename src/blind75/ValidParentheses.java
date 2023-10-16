@@ -2,6 +2,10 @@ package blind75;
 
 import java.util.Stack;
 
+/**
+ * https://leetcode.com/problems/valid-parentheses/
+ */
+
 public class ValidParentheses {
 
     static boolean isValidBrute(String str){

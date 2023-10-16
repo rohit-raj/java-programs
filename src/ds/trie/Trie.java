@@ -1,10 +1,13 @@
 package ds.trie;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * https://leetcode.com/problems/implement-trie-prefix-tree/
  */
-class Trie {
+public class Trie {
 
     public void insert(TrieNode root, String word) {
         TrieNode node = root;
@@ -82,6 +85,33 @@ class Trie {
         return node!=null && node.isEnd() ? node.endsWith : 0;
     }
 
+    public List<String> getAllWords(TrieNode node, String word, List<String> result){
+        if(node.isEnd()){
+            result.add(word);
+        }
+        for(char c='a';c<='z';c++){
+            if(node.containsKey(c)){
+                getAllWords(node.get(c), word+c, result);
+            }
+        }
+        return result;
+    }
+
+    public List<String> wordsStartingWith(TrieNode root, String word){
+        List<String> ans = new ArrayList<>();
+        TrieNode node = root;
+        for (int i = 0; i < word.length(); i++) {
+            char curLetter = word.charAt(i);
+            if (node.containsKey(curLetter)) {
+                node = node.get(curLetter);
+            } else {
+                return ans;
+            }
+        }
+        getAllWords(node, word, ans);
+        return ans;
+    }
+
     public void delete(TrieNode root, String word){
         TrieNode node = root;
         for(char ch : word.toCharArray()){
@@ -132,10 +162,11 @@ class Trie {
         TrieNode root = new TrieNode();
         T.insert(root,"coding");
         T.insert(root,"ninja");
+        T.insert(root,"nine");
         String word1 = "coding";
         System.out.println("Count Words Equal to "+word1+" "+T.countWordsEqualTo(root, word1));
         String word2 = "nin";
-        System.out.println("Count Words Equal to "+word2+" "+T.countWordsStartingWith(root, word2));
+        System.out.println("Count Words Equal to "+word2+" "+T.wordsStartingWith(root, word2));
         T.erase(root, "coding");
         T.insert(root,"samsung");
         T.insert(root,"samsung");
@@ -143,7 +174,7 @@ class Trie {
         T.erase(root, "vivo");
 
         String word3 = "samsung";
-        System.out.println("Count Words Starting With "+word3+" "+T.countWordsEqualTo(root, word3));
+        System.out.println("Count Words Starting With "+word3+" "+T.startsWith(root, word3));
         String word4 = "vi";
         System.out.println("Count Words Starting With "+word4+" "+T.countWordsStartingWith(root,word4));
     }

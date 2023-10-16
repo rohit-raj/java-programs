@@ -34,7 +34,7 @@ public class ArrayProduct {
         return output;
     }
     public static void main(String[] args) {
-        int [] nums = {1,2,3};
+        int [] nums = {1,4,3,6,8};
         ArrayProduct ap = new ArrayProduct();
 
         int[] res = ap.product(nums);
