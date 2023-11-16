@@ -126,7 +126,7 @@ public class SetMatrixZero {
 //        printMatrix(mat);
 
         if(col0 == 0){
-            for(int i=0;i<m;i++){
+            for(int i=0;i<n;i++){
                 mat[i][0] = 0;
             }
         }

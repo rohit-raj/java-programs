@@ -1,5 +1,7 @@
 package blind75;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -51,6 +53,33 @@ public class WordBreak {
         }
         return dp[n-1];
 
+    }
+
+    /**
+     * Higlhy optimal
+     */
+
+    public static boolean wordBreakOptimal2(String s, List<String> wordDict){
+        Boolean[] dp = new Boolean[s.length()+1];
+        return solution(s, wordDict, 0, dp);
+    }
+
+    public static boolean solution(String s, List<String> wordDict, int len, Boolean[] dp){
+        if(len == s.length()){
+            return true;
+        }
+
+        if (dp[len] !=null) return dp[len];
+
+        for(String word : wordDict){
+            if(s.startsWith(word, len)){
+                if(solution(s, wordDict, len+word.length(), dp)){
+                    dp[len] = true;
+                }
+
+            }
+        }
+        return dp[len] == false;
     }
 
     static boolean solve(String s, List<String> wordDict, int length, Boolean[] dp){

@@ -1,7 +1,7 @@
 package blind75;
 
 /**
- * https://leetcode.com/problems/longest-palindromic-substring/description/
+ * https://leetcode.com/problems/longest-palindromic-substring/
  * https://www.youtube.com/watch?v=QfZvw8_jz1w : Optimal
  */
 class LongestPalindromicSubstring {

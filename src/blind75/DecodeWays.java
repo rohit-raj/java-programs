@@ -1,6 +1,7 @@
 package blind75;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * https://leetcode.com/problems/decode-ways/
@@ -8,7 +9,7 @@ import java.util.Arrays;
 public class DecodeWays {
     public static int numDecodingsMemo(String s, int i, int[] dp) {
         if(i==s.length()) return 1;
-        if(s.charAt(0) == '0') return 0;
+        if(s.charAt(i) == '0') return 0;
 
         if(dp[i]!=-1) return dp[i];
 

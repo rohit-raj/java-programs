@@ -10,12 +10,12 @@ import java.util.Map;
  */
 public class LRUCacheDLL {
     int capacity;
-    Map<Integer, Node> dict;
+    Map<Integer, Node> cache;
     Node head;
     Node tail;
     public LRUCacheDLL(int capacity) {
         this.capacity = capacity;
-        dict = new HashMap<>();
+        cache = new HashMap<>();
         head = new Node(-1,-1);
         tail = new Node(-1,-1);
         head.right = tail;
@@ -23,28 +23,28 @@ public class LRUCacheDLL {
     }
 
     public int get(int key) {
-        if(!dict.containsKey(key)) return -1;
+        if(!cache.containsKey(key)) return -1;
 
-        Node node = dict.get(key);
+        Node node = cache.get(key);
         remove(node);
         add(node);
         return node.val;
     }
 
     public void put(int key, int value) {
-        if(dict.containsKey(key)){
-            Node oldNode = dict.get(key);
+        if(cache.containsKey(key)){
+            Node oldNode = cache.get(key);
             remove(oldNode);
         }
 
         Node node = new Node(key, value);
-        dict.put(key, node);
+        cache.put(key, node);
         add(node);
 
-        if(dict.size() > capacity){
+        if(cache.size() > capacity){
             Node nodeToDelete = head.right;
             remove(nodeToDelete);
-            dict.remove(nodeToDelete.key);
+            cache.remove(nodeToDelete.key);
         }
     }
 

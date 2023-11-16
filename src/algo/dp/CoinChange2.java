@@ -5,6 +5,18 @@ package algo.dp;
  */
 public class CoinChange2 {
 
+    public static int calculateCoinChangeBrute(int[] coins, int amount, int idx){
+        if(amount == 0) return 1;
+        if(idx >= coins.length) return 0;
+
+        int dontPick = calculateCoinChangeBrute(coins, amount, idx+1);
+        int pick = 0;
+        if(coins[idx] <= amount){
+            pick = calculateCoinChangeBrute(coins, amount-coins[idx], idx);
+        }
+        return pick + dontPick;
+    }
+
     public static long calculateCoinChangeBetter(int[] coins, int target){
         long[] dp = new long[target+1];
 
@@ -52,6 +64,7 @@ public class CoinChange2 {
         int[] coins = {1,2,5};
         int amount = 5;
 
+        System.out.println("ansBrute : "+calculateCoinChangeBrute(coins, amount, 0));
         System.out.println("ans : "+calculateCoinChangeBetter(coins, amount));
         System.out.println("ans : "+calculateCoinChangeOptimal(coins, amount));
     }

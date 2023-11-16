@@ -1,4 +1,4 @@
-package ds.arrays;
+package blind75;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -43,4 +43,5 @@ public class TopKFrequentElements {
         List<Integer> ans = Arrays.stream(topKFrequentBrute(nums, k)).boxed().collect(Collectors.toList());
         System.out.println("frequent elements brute : "+ ans);
     }
+
 }

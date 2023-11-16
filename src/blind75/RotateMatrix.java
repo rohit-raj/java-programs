@@ -21,6 +21,8 @@ public class RotateMatrix {
                 temp[j][n-i-1] = mat[i][j];
             }
         }
+        printMatrix(temp);
+        System.out.println("***********************************");
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
                 mat[i][j] = temp[i][j];
@@ -88,14 +90,14 @@ public class RotateMatrix {
         int[][] res1 = rotateBrute(mat1);
         printMatrix(res1);
 
-        System.out.println("Optimal");
+        /*System.out.println("Optimal");
 //        printMatrix(mat2);
         int[][] res2 = rotateOptimal(res1);
         printMatrix(res2);
 
         System.out.println("Another");
         int[][] res3 = rotateOptimal(res2);
-        printMatrix(res3);
+        printMatrix(res3);*/
 
     }
 

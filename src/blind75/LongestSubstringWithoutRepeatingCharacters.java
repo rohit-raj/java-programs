@@ -48,17 +48,17 @@ public class LongestSubstringWithoutRepeatingCharacters {
 
         Set<Character> set = new HashSet<>();
 
-        int left = 0;
-        for(int right=0;right<n;right++){
-            if(!set.contains(str.charAt(right))){
-                set.add(str.charAt(right));
-                maxLen = Math.max(maxLen, right-left+1);
+        int start = 0;
+        for(int end=0;end<n;end++){
+            if(!set.contains(str.charAt(end))){
+                set.add(str.charAt(end));
+                maxLen = Math.max(maxLen, end-start+1);
             } else {
-                while (set.contains(str.charAt(right))){
-                    set.remove(str.charAt(left));
-                    left++;
+                while (set.contains(str.charAt(end))){
+                    set.remove(str.charAt(start));
+                    start++;
                 }
-                set.add(str.charAt(right));
+                set.add(str.charAt(end));
             }
         }
         return maxLen;

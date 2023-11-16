@@ -86,36 +86,10 @@ public class DegreeOfAnArray {
     }
 
 
-    public static int degree2(int[] nums){
-        Map<Integer, int[]> map = new HashMap<>();
-        int max = 0;
-        int end = 0;
-
-        for(int i=0;i<nums.length;i++){
-            if(!map.containsKey(nums[i])){
-                map.put(nums[i], new int[]{i,i,1});
-                if(max == 0) max=1;
-                if(end ==0) end=1;
-            } else {
-                int[] value = map.get(nums[i]);
-                value[1]=i;
-                value[2]++;
-                if(max < value[2]){
-                    max = value[2];
-                    end = value[1]-value[0]+1;
-                } else if(value[2]==max){
-                    end = Math.min(end, value[1]-value[0]+1);
-                }
-            }
-        }
-        return end;
-    }
-
     public static void main(String[] args) {
         int[] inp = {1,2,1,3,4,2};
 
 //        System.out.println("findShortestSubArray : " + findShortestSubArray(inp));
-//        System.out.println("degree : " + degree(Arrays.stream(inp).boxed().collect(Collectors.toList())));
-        System.out.println("degree : " + degree2(inp));
+        System.out.println("degree : " + degree(Arrays.stream(inp).boxed().collect(Collectors.toList())));
     }
 }

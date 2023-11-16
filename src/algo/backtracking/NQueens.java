@@ -10,10 +10,15 @@ import java.util.stream.Collectors;
  */
 public class NQueens {
 
+    //since we are iterating from left to right i.e column wise. we just have to check in 3 directions
+    // 1. diagonally up towards left : col-- && row--
+    // 2. Diagonally down towards left : col-- && row++
+    // 3. Towards left : col--
     static boolean checkerBrute(char[][] board, int row, int col){
         int originalRow = row;
         int originalCol = col;
 
+        //Diagonally up towards left
         while (row>=0 && col>=0){
             if(board[row][col] == 'Q') return false;
             row--;
@@ -23,6 +28,7 @@ public class NQueens {
         row = originalRow;
         col = originalCol;
 
+        //Towards left
         while (col>=0){
             if(board[row][col] == 'Q') return false;
             col--;
@@ -31,6 +37,7 @@ public class NQueens {
         row = originalRow;
         col = originalCol;
 
+        //Diagonally down towards left
         while (col>=0 && row<board.length){
             if(board[row][col] == 'Q') return false;
             col--;
@@ -54,7 +61,7 @@ public class NQueens {
         }
 
         for(int row=0;row<n;row++){
-            if(checkerBrute(board, row, col)){
+            if(checkerBrute(board, row, col)){ //checking if we can fill a queen
                 board[row][col] = 'Q';
                 solveBrute(col+1, n, board, res);
                 board[row][col] = '.';

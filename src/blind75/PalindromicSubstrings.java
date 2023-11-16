@@ -1,5 +1,8 @@
 package blind75;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * https://leetcode.com/problems/palindromic-substrings/
  */
@@ -27,6 +30,8 @@ public class PalindromicSubstrings {
             return n;
         }
     }
+    public static List<String> ans = new ArrayList<>();
+
 
     static int countSubstringsOptimal(String str){
         int res = 0;
@@ -39,12 +44,15 @@ public class PalindromicSubstrings {
             res +=even;
         }
 
+        System.out.println("ans ::: "+ ans);
+
         return res;
     }
 
     static int iterateFromMiddle(String str, int left, int right){
         int count = 0;
         while (left>=0 && right<str.length() && str.charAt(left)==str.charAt(right)){
+            ans.add(str.substring(left, right+1));
             count++;
             left--;
             right++;
@@ -53,7 +61,7 @@ public class PalindromicSubstrings {
     }
 
     public static void main(String[] args) {
-        String str = "pooop";
+        String str = "aba";
 
 //        System.out.println("countSubstringsBrute : "+countSubstringsBrute(str));
         System.out.println("countSubstringsOptimal : "+countSubstringsOptimal(str));

@@ -48,15 +48,43 @@ public class InsertIntervals {
         return mergedList.toArray(new int[mergedList.size()][2]);
     }
 
+
+    public static int[][] insertIntervalOptimal(int[][] intervals, int[] newInterval){
+        List<int[]> list = new ArrayList<>();
+        for(int[] interval : intervals){
+            if(newInterval == null || interval[1] < newInterval[0]){
+                list.add(interval);
+            } else if(newInterval[1] < interval[0]){
+                list.add(newInterval);
+                list.add(interval);
+                newInterval = null;
+            } else {
+                newInterval[0] = Math.min(newInterval[0], interval[0]);
+                newInterval[1] = Math.max(newInterval[1], interval[1]);
+            }
+        }
+        if(newInterval != null){
+            list.add(newInterval);
+        }
+        return list.toArray(new int[list.size()][]);
+    }
+
     public static void main(String[] args) {
-        int[][] intervals = {{1,2}, {3,5}, {4,8}, {6,7},{8,10}, {12,16}};
+        int[][] intervals = {{1,2}, {3,5}, {6,7},{8,10}, {12,16}};
 
         int[] newInterval = {4,8};
 
-        intervals = insertInterval(intervals, newInterval);
+//        int[][] intervalsRes = insertInterval(intervals, newInterval);
 
-        int[][] res = mergeInterval(intervals);
-        print2DArray("merged : ", res);
+//        int[][] res = mergeInterval(intervalsRes);
+//        print2DArray("merged : ", res);
+
+
+        int[][] intervals2 = {{1,2}, {3,5}, {6,7},{8,10}, {12,16}};
+        int[] newInterval2 = {4,8};
+
+        int[][] resOpt = insertIntervalOptimal(intervals2, newInterval2);
+        print2DArray("optimal : ", resOpt);
     }
 
     static void print2DArray(String message, int[][] mat){

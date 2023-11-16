@@ -125,14 +125,13 @@ public class LongestIncreasingSubsequence {
     }
 
     //solution using binary search
-
     public static int lengthOfLIS(int[] nums) {
         int n = nums.length;
         List<Integer> ls = new ArrayList<>();
         ls.add(nums[0]);
         for(int i = 1;i<n;i++){
             int prevItem = ls.get(ls.size()-1);
-            System.out.println("nums[i] : " + nums[i] + " :: prev : "+ prevItem); // && nums[i]-prevItem <=3
+//            System.out.println("nums[i] : " + nums[i] + " :: prev : "+ prevItem); // && nums[i]-prevItem <=3
             if(nums[i] > prevItem) {
                 ls.add(nums[i]);
             }else {
@@ -145,17 +144,38 @@ public class LongestIncreasingSubsequence {
             }
         }
 
+
+
         return ls.size();
+    }
+
+
+    //using 1D DP
+    public static int lengthOfLISUsing1DDp(int[] nums){
+        int n = nums.length;
+        int[] dp = new int[n+1];
+        Arrays.fill(dp, 1); // filling with 1 as min length of LIS would be 1
+        int max = 0;
+        for (int i=1;i<n;i++){
+            for(int j=0;j<i;j++){
+                if(nums[i] > nums[j]){
+                    dp[i] = Math.max(dp[i], dp[j]+1);
+                }
+            }
+            max = Math.max(max, dp[i]);
+        }
+        return max;
     }
 
     public static void main(String[] args) {
         int[] nums = {4,2,1,4,3,4,5,8,15};
 
-//        System.out.println("length = "+ length(nums));
-//        System.out.println("lengthMemo = "+ lengthMemo(nums));
-//        System.out.println("lengthTabu = "+ lengthTabu(nums));
-//        System.out.println("lengthTabu2 = "+ lengthTabu2(nums));
+        System.out.println("length = "+ length(nums));
+        System.out.println("lengthMemo = "+ lengthMemo(nums));
+        System.out.println("lengthTabu = "+ lengthTabu(nums));
+        System.out.println("lengthTabu2 = "+ lengthTabu2(nums));
         System.out.println("lengthOfLIS = "+ lengthOfLIS(nums));
+        System.out.println("lengthOfLISUsing1DDp = "+ lengthOfLISUsing1DDp(nums));
 
 
 //        System.out.println("elements : " + printElements(nums));

@@ -1,7 +1,7 @@
 package ds.trie;
 
 public class TrieNode {
-    TrieNode[] childNode;
+    public TrieNode[] childNode;
     int wordCount=0;
     final int R = 26;
     public boolean isEnd=false;
