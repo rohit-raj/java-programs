@@ -141,7 +141,7 @@ public class SearchSuggestion {
             insertToTrie(root, product);
         }
 
-        trie.printTrieTree(root);
+//        trie.printTrieTree(root);
 
         String prefix = "";
         for(char c : searchWord.toCharArray()){
@@ -153,9 +153,10 @@ public class SearchSuggestion {
     }
 
     public static void main(String[] args) {
-        String [] products = {"havana"};
-        String searchWord = "tatiana";
+        String [] products = {"havana","car","camera","cart","cag","cozy","camp"};
+        String searchWord = "car";
 
         System.out.println("suggestedBinary : "+ suggestedProductsTrie(products, searchWord));
+//        System.out.println("suggestedBinary : "+ suggestedProductsLoop(products, searchWord));
     }
 }

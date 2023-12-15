@@ -2,6 +2,9 @@ package blind75;
 
 import java.util.Arrays;
 
+/**
+ * https://leetcode.com/problems/unique-paths/
+ */
 public class UniquePaths {
 
     public static int uniquePathsBrute(int m, int n, int row, int col){

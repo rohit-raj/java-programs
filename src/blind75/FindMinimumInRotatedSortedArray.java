@@ -1,5 +1,8 @@
 package blind75;
 
+/**
+ * https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
+ */
 public class FindMinimumInRotatedSortedArray {
 
     public int findMinBrute(int[] nums) {

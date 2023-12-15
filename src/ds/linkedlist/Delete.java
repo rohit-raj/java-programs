@@ -157,6 +157,8 @@ public class Delete {
         Node head = null;
 
         head = sll.insertAtLast(head, 1);
+        head = sll.insertAtLast(head, 2);
+        head = sll.insertAtLast(head, 3);
 
         sll.print(head);
 
